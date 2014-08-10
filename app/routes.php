@@ -13,7 +13,7 @@
 
 Route::get('/', function()
 {
-	return View::make('hello');
+	return View::make('form');
 });
 
 Route::get('form', function()
@@ -23,11 +23,18 @@ Route::get('form', function()
 
 Route::post('form', function()
 {
-	
-    Input::flashOnly('paragraphs');
+    
+
+            $generator = new Badcow\LoremIpsum\Generator();
+
+            $paragraphs = $generator->getParagraphs(Input::old('paragraphs'));
+
+            return implode('<p>', $paragraphs);
+
+       
+         
     
     
-    return Redirect::to('paragraph-results');
     
 });
 
